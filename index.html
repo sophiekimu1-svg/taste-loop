@@ -211,7 +211,7 @@ footer{max-width:none;margin:0;padding:48px 28px;background:var(--ink);color:rgb
 <div class="kpi"><small>쿠폰 사용</small><div>30건</div><small>목표</small></div>
 <div class="kpi"><small>기업별 개선 리포트</small><div>3건</div><small>목표</small></div>
 </div>
-<div class="card feature" style="margin-top:16px"><h3>해외 실증 계획</h3><p class="note" style="margin:0">목표국 1개국(미정), 해외 현지 소비자 20~30명(목표), 별도 재원 확보 시 추진. 국내 거주 외국인 응답과 해외 현지 소비자 응답은 따로 집계합니다.</p></div>
+<div class="card feature" style="margin-top:16px"><h3>해외 실증 계획</h3><p class="note" style="margin:0">목표국 <b>미국</b>. 현지 협력 거점 1곳(지인 네트워크) 확보, 시식 운영은 협의 예정. 해외 현지 소비자 20~30명(목표), 별도 재원 확보 시 추진. 국내 거주 외국인 응답과 해외 현지 소비자 응답은 따로 집계합니다.</p></div>
 </div>
 
 <div class="sechead"><p class="eyebrow">03 Who benefits</p><h2>기업은 데이터를,<br>상권은 매출을 얻습니다</h2></div>
@@ -305,8 +305,8 @@ footer{max-width:none;margin:0;padding:48px 28px;background:var(--ink);color:rgb
 <div class="step"><b>현지 파트너</b>시식 운영과 판매처 연결이 가능한 협력처</div>
 </div>
 <div class="card sim"><h3>해외 검증 시뮬레이션 <span class="pill">모든 수치 가상, 2027 계획 시연</span></h3>
-<p class="note" style="margin:0 0 14px">목표 국가를 고르면 샘플 발송부터 개선 권고까지 순서대로 보여 줍니다. 전남 1차 기준은 응답 120명, 고흥 유자청 500g입니다.</p>
-<div class="langs" id="simc"><button data-c="vn" class="on">베트남</button><button data-c="us">미국</button><button data-c="jp">일본</button></div>
+<p class="note" style="margin:0 0 14px">목표국은 미국이며, 베트남과 일본은 비교용입니다. 국가를 고르면 샘플 발송부터 개선 권고까지 순서대로 보여 줍니다. 전남 1차 기준은 응답 120명, 고흥 유자청 500g입니다.</p>
+<div class="langs" id="simc"><button data-c="us" class="on">미국 (목표국)</button><button data-c="vn">베트남 (비교)</button><button data-c="jp">일본 (비교)</button></div>
 <button class="btn y" id="simrun">시뮬레이션 실행</button>
 <div id="simout" style="margin-top:20px"></div></div>
 </section>
@@ -421,9 +421,9 @@ if(!out.length)out.push(['현재 유지','큰 개선 신호 없음','응답을 �
 return `<div class="card ai" style="margin-top:20px"><h3>AI 제품 개선 제안 <span class="pill">규칙 기반 시연</span></h3><p class="note" style="margin:0 0 14px">설문과 구매 데이터에서 근거를 찾아 개선안을 제시합니다. 실서비스에서는 AI가 자유 의견까지 분석하고 사람이 검토합니다.</p>${out.map(([t,e,d])=>`<div class="sug"><b>${t}</b><span class="ev">근거: ${e}</span><p>${d}</p></div>`).join('')}</div>`}
 const GJ={n:120,taste:82,intent:61,buy:25,price:35,sweet:18};
 const CN={vn:{name:'베트남',city:'하노이',n:30,taste:74,intent:48,price:52,sweet:38,partner:'하노이 한인마트 1곳 (협의 예정)'},
-us:{name:'미국',city:'LA',n:25,taste:68,intent:40,price:44,sweet:52,partner:'LA 아시안마켓 1곳 (협의 예정)'},
+us:{name:'미국',city:'미국 현지',n:25,taste:68,intent:40,price:44,sweet:52,partner:'현지 협력 거점 1곳 (지인 네트워크, 협의 예정)'},
 jp:{name:'일본',city:'오사카',n:28,taste:79,intent:45,price:39,sweet:21,partner:'오사카 식품 셀렉트숍 1곳 (협의 예정)'}};
-let simC='vn';document.querySelectorAll('#simc button').forEach(b=>b.onclick=()=>{simC=b.dataset.c;document.querySelectorAll('#simc button').forEach(x=>x.classList.toggle('on',x===b));$('#simout').innerHTML=''});
+let simC='us';document.querySelectorAll('#simc button').forEach(b=>b.onclick=()=>{simC=b.dataset.c;document.querySelectorAll('#simc button').forEach(x=>x.classList.toggle('on',x===b));$('#simout').innerHTML=''});
 $('#simrun').onclick=()=>{const c=CN[simC],o=$('#simout');
 const rec=[];const dp=c.price-GJ.price,ds=c.sweet-GJ.sweet;
 if(dp>=5)rec.push(`${c.name} 응답자의 가격 부담 비율이 전남 1차보다 <b>${dp}%p</b> 높습니다. 500g 제품 외에 250g 소용량의 가격 수용성을 추가 검증할 것을 제안합니다.`);
