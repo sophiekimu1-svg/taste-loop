@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-AGRI TASTE LOOP</title>
+<style>
+@font-face{font-family:Pretendard;src:url(PretendardVariable.woff2) format("woff2");font-weight:45 920;font-display:swap}
+:root{--ink:#1d1b16;--sub:#6b665c;--line:#e6e0d4;--paper:#faf7f1;--card:#fff;--yuja:#e9a23b;--yuja-d:#b8741a;--green:#3f6b4e;--red:#b5483a}
+*{box-sizing:border-box}
+body{margin:0;font-family:Pretendard,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+header{position:sticky;top:0;z-index:10;background:rgba(250,247,241,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.bar{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:12px 20px;overflow-x:auto}
+.logo{font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.logo span{color:var(--yuja-d)}
+nav{display:flex;gap:4px;margin-left:auto}
+nav a{padding:6px 11px;border-radius:999px;text-decoration:none;font-size:14px;color:var(--sub);white-space:nowrap}
+nav a.on{background:var(--ink);color:#fff}
+.demo{font-size:12px;color:var(--sub);border:1px solid var(--line);border-radius:999px;padding:2px 9px;white-space:nowrap}
+main{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
+section{display:none}
+section.on{display:block}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.2;letter-spacing:-.03em;margin:0 0 12px}
+h2{font-size:26px;letter-spacing:-.02em;margin:0 0 6px}
+h3{font-size:17px;margin:0 0 8px}
+.lead{color:var(--sub);font-size:17px;margin:0 0 22px}
+.hero{position:relative;border-radius:18px;overflow:hidden;min-height:440px;display:flex;align-items:flex-end;color:#fff}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.68))}
+.hero .t{position:relative;z-index:1;padding:32px}
+.hero .lead{color:rgba(255,255,255,.88)}
+.tag{position:absolute;z-index:2;right:12px;bottom:10px;font-size:11px;color:rgba(255,255,255,.75)}
+.ph{position:relative;border-radius:14px;overflow:hidden}
+.ph img{display:block;width:100%;height:100%;object-fit:cover}
+.ph .tag{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;background:var(--ink);color:#fff}
+.btn.y{background:var(--yuja);color:#1d1b16}
+.btn.w{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.sm{padding:7px 12px;font-size:14px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.step b{display:block;font-size:13px;color:var(--yuja-d);margin-bottom:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+input,select,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+textarea{min-height:80px}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.scale{display:flex;gap:6px}
+.scale button{flex:1;padding:10px 0;border:1px solid var(--line);background:#fff;border-radius:10px;font:inherit;cursor:pointer}
+.scale button.on{background:var(--yuja);border-color:var(--yuja);font-weight:700}
+.note{font-size:13px;color:var(--sub)}
+.langs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.langs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.langs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.coupon{border:2px dashed var(--yuja-d);border-radius:16px;padding:26px;text-align:center;background:#fff8ec}
+.code{font-size:34px;font-weight:800;letter-spacing:.08em;margin:8px 0}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi small{color:var(--sub)}
+.kpi div{font-size:28px;font-weight:800;letter-spacing:-.02em}
+.gap{display:grid;grid-template-columns:110px 1fr 56px;gap:10px;align-items:center;margin:8px 0;font-size:14px}
+.track{height:14px;background:#efe9dd;border-radius:999px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--yuja)}
+.track i.g{background:var(--green)}
+.verdict{border-radius:14px;padding:18px;margin-top:16px;background:#f2efe7;border-left:5px solid var(--sub)}
+.verdict.go{border-color:var(--green);background:#eef4ef}
+.verdict.fix{border-color:var(--yuja-d);background:#fbf3e4}
+.verdict.hold{border-color:var(--red);background:#f8ecea}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:2px 8px;background:#efe9dd}
+.plan{display:inline-block;font-size:13px;font-weight:700;color:#fff;background:var(--green);border-radius:999px;padding:3px 10px;margin-bottom:10px}
+.crit{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.empty{padding:30px;text-align:center;color:var(--sub)}
+.ok{color:var(--green);font-weight:700}.ng{color:var(--red);font-weight:700}
+footer{max-width:1080px;margin:0 auto;padding:0 20px 40px;font-size:12px;color:var(--sub)}
+@media(max-width:760px){.steps,.kpis,.crit{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.hero{min-height:380px}.hero .t{padding:22px}nav{margin-left:0}}
+</style>
+<style>
+:root{--ink:#0c0c0d;--sub:#6e6e73;--line:#e8e8ea;--paper:#ffffff;--soft:#f5f5f7;--yuja:#f2a516;--yuja-d:#b97500;--green:#2f6b4a;--red:#b5483a}
+body{background:var(--paper);font-size:16px;line-height:1.65;letter-spacing:-.01em;word-break:keep-all}
+header{background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.bar{max-width:1200px;padding:0 28px;height:64px;gap:20px;overflow:visible}
+.logo{font-size:17px;font-weight:800;letter-spacing:-.03em}
+.logo span{color:var(--yuja-d);font-weight:600}
+.demo{border:0;background:var(--soft);font-size:11px;font-weight:600;letter-spacing:.02em;padding:4px 10px}
+nav{gap:26px}
+nav a{padding:21px 0;border-radius:0;font-size:14px;font-weight:500;color:var(--sub);border-bottom:2px solid transparent;transition:color .2s}
+nav a:hover{color:var(--ink)}
+nav a.on{background:none;color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+main{max-width:1200px;padding:56px 28px 120px}
+h1{font-size:clamp(40px,6.6vw,80px);line-height:1.08;letter-spacing:-.05em;font-weight:800;margin:0 0 24px}
+h2{font-size:clamp(28px,4vw,44px);line-height:1.2;letter-spacing:-.04em;font-weight:800;margin:0 0 12px}
+h3{font-size:19px;letter-spacing:-.03em;font-weight:700;margin:0 0 10px}
+.lead{font-size:clamp(16px,1.6vw,19px);line-height:1.7;color:var(--sub);margin:0 0 32px;max-width:560px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yuja-d)}
+.eyebrow:before{content:"";width:22px;height:2px;background:currentColor}
+.sechead{margin:96px 0 36px}
+.sechead.top{margin-top:0}
+.hero2{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;min-height:calc(100vh - 200px)}
+.hero-img{aspect-ratio:4/5;border-radius:28px}
+.ph{border-radius:24px;background:var(--soft)}
+.tag{right:auto;left:14px;top:14px;bottom:auto;font-size:11px;font-weight:600;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(6px);padding:4px 10px;border-radius:999px}
+.ph .tag{text-shadow:none}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:72px;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.stats div{padding:28px 24px 28px 0}
+.stats div+div{padding-left:24px;border-left:1px solid var(--line)}
+.stats b{display:block;font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1.1}
+.stats span{font-size:14px;color:var(--sub)}
+.btn{border-radius:999px;padding:15px 26px;font-size:15px;font-weight:700;letter-spacing:-.01em;transition:transform .15s,opacity .15s}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.btn.y{background:var(--ink);color:#fff}
+.btn.w{background:#fff;color:var(--ink);border:1px solid #d2d2d7}
+.btn.sm{padding:9px 16px;font-size:13px}
+.steps{grid-template-columns:repeat(4,1fr);gap:28px;margin:0}
+.step{background:none;border:0;border-top:2px solid var(--ink);border-radius:0;padding:22px 0 0;font-size:15px;color:#3a3a3c;line-height:1.65}
+.step b{font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--ink);margin-bottom:14px}
+.crit .step{border-top-color:var(--yuja)}
+.grid2{gap:28px}
+.card{border:1px solid var(--line);border-radius:24px;padding:32px;background:#fff}
+.feature{background:var(--soft);border:0}
+.feature h3{font-size:22px}
+.feature .note{font-size:15px;line-height:1.7}
+label{font-size:13px;font-weight:700;margin:20px 0 8px;color:#3a3a3c}
+input,select,textarea{border:1px solid #d2d2d7;border-radius:12px;padding:13px 14px;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--ink);box-shadow:0 0 0 3px rgba(12,12,13,.08)}
+.scale button{border:1px solid #d2d2d7;border-radius:12px;padding:12px 0;font-weight:600}
+.scale button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.langs{gap:8px;margin-bottom:16px}
+.langs button{border:1px solid #d2d2d7;padding:8px 16px;font-weight:600}
+.note{font-size:13px;line-height:1.6;color:var(--sub)}
+.coupon{border:0;border-radius:28px;padding:48px 32px;background:var(--ink);color:#fff}
+.coupon .note{color:rgba(255,255,255,.65)}
+.coupon .pill{background:var(--yuja);color:var(--ink);font-weight:800}
+.coupon .btn.w{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.code{font-size:clamp(36px,6vw,52px);letter-spacing:.1em;color:var(--yuja)}
+.kpis{gap:16px;margin:28px 0}
+.kpi{border:0;background:var(--soft);border-radius:22px;padding:24px}
+.kpi small{font-size:13px}
+.kpi div{font-size:clamp(30px,3.6vw,42px);letter-spacing:-.04em;margin:6px 0}
+.track{height:10px;background:var(--soft)}
+.track i{background:var(--ink)}
+.track i.g{background:var(--yuja)}
+.verdict{border-radius:18px;border-left-width:4px;padding:22px}
+table{font-size:14px}
+td,th{padding:13px 8px}
+th{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.04em}
+.pill{background:var(--soft);font-weight:600;padding:3px 10px}
+.plan{background:var(--soft);color:var(--green);font-size:12px;letter-spacing:.02em;padding:6px 14px;margin-bottom:18px}
+.crit{gap:28px;margin:24px 0 40px}
+footer{max-width:none;margin:0;padding:48px 28px;background:var(--ink);color:rgba(255,255,255,.6);font-size:13px;text-align:center}
+@media(max-width:900px){.hero2{grid-template-columns:1fr;gap:32px;min-height:0}.hero-img{aspect-ratio:4/3;order:-1}.stats{grid-template-columns:1fr 1fr;margin-top:48px}.stats div:nth-child(3){padding-left:0;border-left:0}.stats div:nth-child(n+3){border-top:1px solid var(--line)}.steps,.crit,.kpis{grid-template-columns:1fr 1fr;gap:22px}}
+@media(max-width:760px){.bar{flex-wrap:wrap;height:auto;padding:12px 20px 0;gap:8px 12px}nav{order:3;width:100%;margin:0;gap:22px;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav a{padding:10px 0 12px}main{padding:32px 20px 80px}.sechead{margin:64px 0 24px}.card{padding:24px;border-radius:20px}.grid2{gap:20px}}
+@media(max-width:480px){.steps,.crit{grid-template-columns:1fr}.btns .btn{flex:1;text-align:center}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="logo">K-AGRI <span>TASTE LOOP</span></div>
+<span class="demo">시연 버전</span>
+<nav id="nav">
+<a href="#intro">소개</a><a href="#company">제품 등록</a><a href="#survey">시식 설문</a><a href="#store">점포</a><a href="#report">리포트</a><a href="#global">해외 검증</a>
+</nav></div></header>
+
+<main>
+<!-- 1 소개 -->
+<section id="s-intro">
+<div class="hero2">
+<div><p class="eyebrow">Gwangju Tasting Lab</p><h1>수출 전에,<br>먼저 맛보게<br>합니다.</h1>
+<p class="lead">광주 전통시장과 대학가에서 외국인과 시민이 전남 농식품을 맛보고, 실제로 사는지까지 확인합니다.</p>
+<div class="btns"><a class="btn y" href="#company">기업으로 시작</a><a class="btn w" href="#survey">시식 설문 체험</a></div></div>
+<div class="ph hero-img"><img src="img/hero.jpg" alt="광주 전통시장에서 여러 나라 학생들이 유자차를 시식하는 모습"><span class="tag">연출 이미지</span></div>
+</div>
+<div class="stats"><div><b>5개 언어</b><span>모국어 시식 설문</span></div><div><b>3분</b><span>QR 설문 소요 시간</span></div><div><b>쿠폰 추적</b><span>인근 점포 실제 구매</span></div><div><b>2단계</b><span>광주 실증 후 해외 검증</span></div></div>
+
+<div class="sechead"><p class="eyebrow">01 How it works</p><h2>맛본 반응이 아니라,<br>산 행동을 데이터로 남깁니다</h2></div>
+<div class="steps">
+<div class="step"><b>01 방문</b>전통시장과 대학가 시식 거점에 외국인과 시민이 모입니다</div>
+<div class="step"><b>02 시식과 구매</b>모국어 QR 설문 3분, 쿠폰으로 인근 점포에서 구매합니다</div>
+<div class="step"><b>03 AI 분석</b>"맛있다"는 응답과 "실제로 샀다"는 행동의 차이를 봅니다</div>
+<div class="step"><b>04 해외 검증과 수출 준비</b>개선 제품을 목표 국가에서 다시 검증합니다 (2027 계획)</div>
+</div>
+
+<div class="sechead"><p class="eyebrow">02 Who benefits</p><h2>기업은 데이터를,<br>상권은 매출을 얻습니다</h2></div>
+<div class="grid2">
+<div class="card feature"><h3>기업에게</h3><p class="note" style="margin:0">작은 식품기업이 큰돈을 들이기 전에, 외국인 소비자가 맛보고 산 데이터로 제품을 고칠 수 있습니다.</p></div>
+<div class="card feature"><h3>시장에게</h3><p class="note" style="margin:0">시식한 손님이 쿠폰으로 인근 점포에서 구매해, 상권에 새로운 소비가 생깁니다.</p></div>
+</div>
+<p class="note" style="margin-top:40px">이 화면은 전남대 지역사회 아이디어 경진대회 제출용 작동 시연판입니다. 응답은 지금 쓰는 기기의 브라우저에만 저장됩니다.</p>
+</section>
+
+<!-- 2 제품 등록 -->
+<section id="s-company">
+<div class="sechead top"><p class="eyebrow">For Companies</p><h2>제품 등록</h2></div><p class="lead">제품을 등록하면 시식 설문 QR이 만들어집니다.</p>
+<div class="grid2">
+<form class="card" id="pform">
+<label>제품명</label><input name="name" required placeholder="예: 고흥 유자청">
+<div class="row"><div><label>판매 가격(원)</label><input name="price" type="number" min="0" required placeholder="15000"></div>
+<div><label>용량</label><input name="size" placeholder="500g"></div></div>
+<label>원재료</label><input name="ing" placeholder="유자, 설탕">
+<label>알레르기 성분 (시식 전 다국어로 안내)</label><input name="allergy" placeholder="없음">
+<label>제품 사진</label><input name="photo" type="file" accept="image/*">
+<div style="margin-top:16px" class="btns"><button class="btn y">등록하고 QR 만들기</button><button type="button" class="btn w" id="sample">예시 제품 채우기</button></div>
+</form>
+<div>
+<div class="ph" style="aspect-ratio:4/3"><img src="img/product.jpg" alt="유자청 병"><span class="tag">연출 이미지</span></div>
+<div class="card" style="margin-top:14px" id="qrbox"></div>
+</div></div>
+<div class="card" style="margin-top:20px"><h3>등록된 제품</h3><div id="plist"></div></div>
+</section>
+
+<!-- 3 설문 -->
+<section id="s-survey">
+<div class="grid2">
+<div>
+<div class="langs" id="langs"></div>
+<form class="card" id="sform"></form>
+</div>
+<div><div class="ph" style="aspect-ratio:4/3"><img src="img/survey.jpg" alt="시장에서 QR로 설문하는 외국인 학생"><span class="tag">연출 이미지</span></div>
+<p class="note">모국어로 3분이면 끝납니다. 국적과 연령대 외의 개인정보는 받지 않습니다.</p></div>
+</div>
+</section>
+
+<!-- 쿠폰 -->
+<section id="s-coupon">
+<div class="grid2">
+<div class="coupon" id="cbox"></div>
+<div class="ph" style="aspect-ratio:4/3"><img src="img/coupon.jpg" alt="시장 점포에서 유자청을 사는 손님"><span class="tag">연출 이미지</span></div>
+</div>
+</section>
+
+<!-- 점포 -->
+<section id="s-store">
+<div class="sechead top"><p class="eyebrow">For Stores</p><h2>쿠폰 사용 처리</h2></div><p class="lead">손님이 보여준 쿠폰 번호를 넣고 구매 금액을 기록합니다.</p>
+<div class="grid2">
+<form class="card" id="rform">
+<label>쿠폰 번호</label><input name="code" required placeholder="TL-0000" style="text-transform:uppercase">
+<label>구매 금액(원)</label><input name="amount" type="number" min="0" placeholder="12000">
+<label>점포</label><select name="shop"><option>말바우시장 A점포</option><option>말바우시장 B점포</option><option>전남대 인근 C점포</option></select>
+<div style="margin-top:16px"><button class="btn y">사용 처리</button></div>
+<p id="rmsg" style="margin:12px 0 0"></p>
+</form>
+<div class="card"><h3>최근 사용 기록</h3><div id="rlist"></div></div>
+</div>
+</section>
+
+<!-- 리포트 -->
+<section id="s-report">
+<div class="row" style="align-items:end;flex-wrap:wrap">
+<div style="flex:3"><p class="eyebrow">Insight Report</p><h2>기업 리포트</h2><p class="lead" style="margin:0">맛 평가와 실제 구매를 함께 봅니다.</p></div>
+<div style="flex:1;min-width:200px"><select id="rp"></select></div>
+</div>
+<div id="rbody"></div>
+<div class="card" style="margin-top:20px"><div class="row" style="align-items:center;flex-wrap:wrap"><p class="note" style="margin:0;flex:3">시연용으로 가상 응답 20건을 넣어 볼 수 있습니다. 가상 응답은 리포트에 따로 표시됩니다.</p><div class="btns" style="flex:2;justify-content:flex-end"><button class="btn sm w" id="demo">가상 응답 20건 넣기</button><button class="btn sm w" id="reset">기록 지우기</button></div></div></div>
+<div class="ph" style="aspect-ratio:21/9;margin-top:20px"><img src="img/report.jpg" alt="리포트로 개선 회의를 하는 식품기업 팀" style="object-position:center 40%"><span class="tag">연출 이미지</span></div>
+</section>
+
+<!-- 해외 -->
+<section id="s-global">
+<p class="eyebrow">Phase 2 Global</p><br><span class="plan">2027 상반기 계획, 아직 작동 기능 아님</span>
+<h2>해외 현지 검증</h2>
+<p class="lead">광주에서 고친 제품을 목표 국가 소비자에게 소량 보내 다시 맛보게 합니다. 국내 외국인 반응은 해외 수요를 대표하지 않기 때문입니다.</p>
+<div class="grid2">
+<div class="ph" style="aspect-ratio:4/3"><img src="img/ship.jpg" alt="유자청 샘플을 해외 발송용 상자에 포장하는 모습"><span class="tag">연출 이미지</span></div>
+<div class="ph" style="aspect-ratio:4/3"><img src="img/abroad.jpg" alt="해외 마트에서 유자차를 시식하는 소비자"><span class="tag">연출 이미지 (실제 해외 실증 전)</span></div>
+</div>
+<h3 style="margin-top:24px">목표 국가 선정 기준 (제품별)</h3>
+<div class="crit">
+<div class="step"><b>통관과 표시 규정</b>샘플 반입 요건, 성분과 라벨 표시 기준</div>
+<div class="step"><b>소비자 모집</b>현지 시식 참여자 20~30명 확보 가능성</div>
+<div class="step"><b>물류비</b>국가별 합배송 비용과 유통기한</div>
+<div class="step"><b>현지 파트너</b>시식 운영과 판매처 연결이 가능한 협력처</div>
+</div>
+<div class="card"><h3>국내와 해외 비교 리포트 예시 <span class="pill">가상 데이터</span></h3>
+<table><tr><th>지표</th><th>광주 1차</th><th>해외 2차</th><th>읽는 법</th></tr>
+<tr><td>맛 긍정 비율</td><td>82%</td><td>74%</td><td>현지에서도 맛은 통함</td></tr>
+<tr><td>구매 (국내는 쿠폰 사용, 해외는 구매 의향)</td><td>25%</td><td>48%</td><td>해외는 의향이라 실구매와 구분</td></tr>
+<tr><td>가격 부담 응답</td><td>35%</td><td>52%</td><td>현지 가격과 용량 조정 필요</td></tr>
+<tr><td>권고</td><td colspan="3">소용량 제품으로 현지 판매처 연동 후 실구매 재검증</td></tr></table>
+<p class="note">실구매는 현지 판매처와 연동한 뒤 측정합니다. 무료 시식 후 구매 의향과 실제 구매는 구분합니다.</p></div>
+</section>
+</main>
+<footer>K-AGRI TASTE LOOP 시연판 | 아벤트라(AVENTRA) | 사진은 모두 생성형 AI로 만든 연출 이미지입니다.</footer>
+
+<script>
+const S={get(k,d){try{return JSON.parse(localStorage.getItem('tl_'+k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem('tl_'+k,JSON.stringify(v))}catch(e){}}};
+let products=S.get('products',[]),responses=S.get('responses',[]),coupons=S.get('coupons',[]);
+const save=()=>{S.set('products',products);S.set('responses',responses);S.set('coupons',coupons)};
+if(!products.length){products=[{id:'p1',name:'고흥 유자청',price:15000,size:'500g',ing:'유자, 설탕',allergy:'없음',photo:''}];save()}
+const $=s=>document.querySelector(s),esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const won=n=>Number(n||0).toLocaleString('ko-KR')+'원';
+
+/* 라우팅 */
+const views=['intro','company','survey','coupon','store','report','global'];
+function route(){let h=location.hash.slice(1);if(!views.includes(h))h='intro';
+views.forEach(v=>$('#s-'+v).classList.toggle('on',v===h));
+document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+h));
+({company:renderCompany,survey:renderSurvey,store:renderStore,report:renderReport}[h]||(()=>{}))();window.scrollTo(0,0)}
+addEventListener('hashchange',route);
+
+/* 제품 등록 */
+let curPid=S.get('cur','p1');
+function renderCompany(){
+$('#plist').innerHTML='<table><tr><th>제품</th><th>가격</th><th>응답</th><th></th></tr>'+products.map(p=>`<tr><td>${esc(p.name)} <span class="note">${esc(p.size)}</span></td><td>${won(p.price)}</td><td>${responses.filter(r=>r.pid===p.id).length}건</td><td><button class="btn sm w" data-q="${p.id}">QR 보기</button></td></tr>`).join('')+'</table>';
+document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{curPid=b.dataset.q;S.set('cur',curPid);showQR()});showQR()}
+function showQR(){const p=products.find(x=>x.id===curPid)||products[0];
+$('#qrbox').innerHTML=`<div class="row" style="align-items:center"><img src="img/qr.png" alt="설문 QR" style="width:130px;flex:0 0 130px;border-radius:8px"><div><h3 style="margin:0">${esc(p.name)} 시식 설문</h3><p class="note" style="margin:4px 0 10px">시식 테이블에 이 QR을 세워 두세요. 설문은 지금 선택한 제품으로 열립니다.</p><a class="btn sm" href="#survey">설문 화면 열기</a></div></div>`}
+$('#sample').onclick=()=>{const f=$('#pform');f.name.value='보성 녹차 티백';f.price.value=9000;f.size.value='20개입';f.ing.value='녹차잎';f.allergy.value='없음'};
+$('#pform').onsubmit=async e=>{e.preventDefault();const f=e.target;let photo='';
+const file=f.photo.files[0];if(file){photo=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(file)})}
+const p={id:'p'+Date.now(),name:f.name.value,price:+f.price.value,size:f.size.value,ing:f.ing.value,allergy:f.allergy.value||'없음',photo:''};
+products.push(p);curPid=p.id;S.set('cur',curPid);save();f.reset();renderCompany()};
+
+/* 설문 (5개 언어) */
+const T={
+ko:{n:'한국어',h:'시식 설문',sub:'3분이면 끝나요. 솔직하게 답해 주세요.',al:'알레르기 성분',nat:'국적',age:'연령대',taste:'맛은 어땠나요?',tex:'식감은 어땠나요?',pack:'포장은 마음에 드나요?',price:'가격이 부담되나요?',pr:['부담 없음','조금 부담','많이 부담'],buy:'사고 싶은가요?',lo:'전혀 아니다',hi:'매우 그렇다',free:'고칠 점이나 하고 싶은 말',agree:'국적과 연령대를 익명 통계로 쓰는 데 동의합니다',send:'제출하고 쿠폰 받기',ages:['10대','20대','30대','40대','50대 이상'],cp:'쿠폰이 나왔어요',cpd:'인근 참여 점포에서 이 화면을 보여주세요',cpo:'10% 할인'},
+en:{n:'English',h:'Tasting Survey',sub:'Takes 3 minutes. Please be honest.',al:'Allergens',nat:'Nationality',age:'Age group',taste:'How was the taste?',tex:'How was the texture?',pack:'Do you like the packaging?',price:'Is the price a burden?',pr:['Not at all','A little','A lot'],buy:'Would you buy it?',lo:'Not at all',hi:'Definitely',free:'What should be improved?',agree:'I agree to anonymous use of my nationality and age group',send:'Submit and get coupon',ages:['Teens','20s','30s','40s','50+'],cp:'Here is your coupon',cpd:'Show this screen at a nearby partner shop',cpo:'10% OFF'},
+ja:{n:'日本語',h:'試食アンケート',sub:'3分で終わります。率直にお答えください。',al:'アレルギー成分',nat:'国籍',age:'年代',taste:'味はいかがでしたか？',tex:'食感はいかがでしたか？',pack:'パッケージは気に入りましたか？',price:'価格は負担ですか？',pr:['負担なし','少し負担','かなり負担'],buy:'買いたいですか？',lo:'全くない',hi:'とてもある',free:'改善点やご意見',agree:'国籍と年代を匿名の統計に使うことに同意します',send:'送信してクーポンを受け取る',ages:['10代','20代','30代','40代','50代以上'],cp:'クーポンです',cpd:'近くの参加店でこの画面を見せてください',cpo:'10%割引'},
+zh:{n:'中文',h:'试吃问卷',sub:'只需3分钟，请如实作答。',al:'过敏成分',nat:'国籍',age:'年龄段',taste:'味道怎么样？',tex:'口感怎么样？',pack:'喜欢包装吗？',price:'价格有负担吗？',pr:['没有负担','有点负担','负担很大'],buy:'想购买吗？',lo:'完全不想',hi:'非常想',free:'需要改进的地方',agree:'同意以匿名方式统计国籍和年龄段',send:'提交并领取优惠券',ages:['10多岁','20多岁','30多岁','40多岁','50岁以上'],cp:'这是您的优惠券',cpd:'请在附近合作店铺出示此页面',cpo:'九折'},
+vi:{n:'Tiếng Việt',h:'Khảo sát nếm thử',sub:'Chỉ mất 3 phút. Hãy trả lời thật lòng.',al:'Thành phần dị ứng',nat:'Quốc tịch',age:'Độ tuổi',taste:'Hương vị thế nào?',tex:'Kết cấu thế nào?',pack:'Bạn có thích bao bì không?',price:'Giá có gây gánh nặng không?',pr:['Không','Hơi đắt','Rất đắt'],buy:'Bạn có muốn mua không?',lo:'Hoàn toàn không',hi:'Rất muốn',free:'Điều cần cải thiện',agree:'Tôi đồng ý cho dùng quốc tịch và độ tuổi ẩn danh',send:'Gửi và nhận phiếu giảm giá',ages:['Thiếu niên','20-29','30-39','40-49','50+'],cp:'Phiếu giảm giá của bạn',cpd:'Hãy đưa màn hình này tại cửa hàng đối tác gần đó',cpo:'Giảm 10%'}};
+const NAT=['Korea','Vietnam','China','Japan','USA','Uzbekistan','Mongolia','Indonesia','Other'];
+let lang=S.get('lang','ko'),ans={};
+function renderSurvey(){const t=T[lang],p=products.find(x=>x.id===curPid)||products[0];
+$('#langs').innerHTML=Object.keys(T).map(k=>`<button class="${k===lang?'on':''}" data-l="${k}">${T[k].n}</button>`).join('');
+document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{lang=b.dataset.l;S.set('lang',lang);renderSurvey()});
+const sc=(k)=>`<div class="scale" data-k="${k}">${[1,2,3,4,5].map(i=>`<button type="button" class="${ans[k]===i?'on':''}" data-v="${i}">${i}</button>`).join('')}</div><div class="row note"><span>${t.lo}</span><span style="text-align:right">${t.hi}</span></div>`;
+$('#sform').innerHTML=`<h2>${t.h}</h2><p class="note" style="margin:0">${esc(p.name)} ${esc(p.size)} | ${t.al}: ${esc(p.allergy)}</p><p class="note">${t.sub}</p>
+<div class="row"><div><label>${t.nat}</label><select name="nat">${NAT.map(n=>`<option>${n}</option>`).join('')}</select></div><div><label>${t.age}</label><select name="age">${t.ages.map((a,i)=>`<option value="${i}">${a}</option>`).join('')}</select></div></div>
+<label>${t.taste}</label>${sc('taste')}<label>${t.tex}</label>${sc('tex')}<label>${t.pack}</label>${sc('pack')}
+<label>${t.price}</label><div class="scale" data-k="price">${t.pr.map((x,i)=>`<button type="button" class="${ans.price===i?'on':''}" data-v="${i}">${x}</button>`).join('')}</div>
+<label>${t.buy}</label>${sc('buy')}<label>${t.free}</label><textarea name="free"></textarea>
+<label style="font-weight:400;display:flex;gap:8px;align-items:flex-start"><input type="checkbox" name="agree" required style="width:auto;margin-top:5px">${t.agree}</label>
+<p id="smsg" class="ng"></p><button class="btn y" style="width:100%">${t.send}</button>`;
+document.querySelectorAll('#sform .scale').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{ans[g.dataset.k]=+b.dataset.v;g.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))}))}
+$('#sform').onsubmit=e=>{e.preventDefault();const f=e.target;
+if(['taste','tex','pack','price','buy'].some(k=>ans[k]===undefined)){$('#smsg').textContent='모든 항목을 골라 주세요 / Please answer all items';return}
+const code='TL-'+Math.random().toString(36).slice(2,6).toUpperCase();
+responses.push({pid:curPid,lang,nat:f.nat.value,age:+f.age.value,...ans,free:f.free.value.trim(),code,t:Date.now(),demo:false});
+coupons.push({code,pid:curPid,used:false});save();ans={};
+const t=T[lang],p=products.find(x=>x.id===curPid)||products[0];
+$('#cbox').innerHTML=`<p class="note" style="margin:0">${esc(p.name)}</p><h2>${t.cp}</h2><div class="code">${code}</div><div class="pill" style="font-size:15px">${t.cpo}</div><p class="note">${t.cpd}</p><a class="btn sm w" href="#store">점포 화면으로 (시연)</a>`;
+location.hash='coupon'};
+
+/* 점포 */
+function renderStore(){const used=coupons.filter(c=>c.used).slice(-8).reverse();
+$('#rlist').innerHTML=used.length?'<table>'+used.map(c=>`<tr><td>${c.code}</td><td>${esc((products.find(p=>p.id===c.pid)||{}).name)}</td><td>${won(c.amount)}</td><td class="note">${esc(c.shop)}</td></tr>`).join('')+'</table>':'<div class="empty">아직 사용된 쿠폰이 없습니다</div>'}
+$('#rform').onsubmit=e=>{e.preventDefault();const f=e.target,code=f.code.value.trim().toUpperCase(),c=coupons.find(x=>x.code===code),m=$('#rmsg');
+if(!c){m.className='ng';m.textContent='없는 쿠폰 번호입니다'}else if(c.used){m.className='ng';m.textContent='이미 사용된 쿠폰입니다'}
+else{c.used=true;c.amount=+f.amount.value||0;c.shop=f.shop.value;c.t=Date.now();save();m.className='ok';m.textContent='사용 처리했습니다';f.reset();renderStore()}};
+
+/* 리포트 */
+const KW={맛:['맛','달','시','쓴','taste','sweet','sour','bitter','味','甘','酸','苦','vị','ngọt','chua'],식감:['식감','건더기','texture','chewy','食感','口感','kết cấu'],포장:['포장','병','용기','package','bottle','jar','パッケージ','包装','瓶','bao bì'],가격:['가격','비싸','price','expensive','価格','高い','价格','贵','giá','đắt']};
+function renderReport(){const sel=$('#rp');sel.innerHTML=products.map(p=>`<option value="${p.id}" ${p.id===curPid?'selected':''}>${esc(p.name)}</option>`).join('');
+sel.onchange=()=>{curPid=sel.value;S.set('cur',curPid);renderReport()};
+const rs=responses.filter(r=>r.pid===curPid),n=rs.length,b=$('#rbody');
+if(!n){b.innerHTML='<div class="card empty">아직 응답이 없습니다. 시식 설문을 받거나 아래에서 가상 응답을 넣어 보세요.</div>';return}
+const pct=x=>Math.round(x/n*100),tasteOk=rs.filter(r=>r.taste>=4).length,buyOk=rs.filter(r=>r.buy>=4).length,
+cs=rs.map(r=>coupons.find(c=>c.code===r.code)).filter(Boolean),usedN=cs.filter(c=>c.used).length,priceHi=rs.filter(r=>r.price>=1).length,
+avg=k=>(rs.reduce((a,r)=>a+r[k],0)/n).toFixed(1),demoN=rs.filter(r=>r.demo).length,sales=cs.filter(c=>c.used).reduce((a,c)=>a+(c.amount||0),0);
+const tp=pct(tasteOk),up=pct(usedN),pp=pct(priceHi);
+const cat={맛:[],식감:[],포장:[],가격:[]};rs.forEach(r=>{if(!r.free)return;const l=r.free.toLowerCase();for(const k in KW)if(KW[k].some(w=>l.includes(w.toLowerCase()))){cat[k].push(r.free)}});
+let v,cls;if(n<20){v=['판단 유보','응답이 '+n+'건으로 20건보다 적습니다. 결과를 참고로만 보고 응답을 더 모아 주세요.'];cls=''}
+else if(tp>=70&&up>=20&&pp<40){v=['해외 추가 검증 권고','맛과 실제 구매가 모두 기준을 넘었습니다. 2단계 해외 현지 검증 후보로 올립니다.'];cls='go'}
+else if(tp>=70){v=['개선 후 재검증','맛은 좋지만 구매로 이어지는 비율이 낮거나 가격 부담이 큽니다. 용량과 가격을 조정해 같은 상권에서 다시 검증하세요.'];cls='fix'}
+else{v=['보류','맛 평가가 기준(긍정 70%)보다 낮습니다. 자유 의견의 맛 관련 지적부터 확인하세요.'];cls='hold'}
+b.innerHTML=`<div class="kpis"><div class="kpi"><small>유효 응답</small><div>${n}건</div><small>${demoN?'가상 '+demoN+'건 포함':'실제 응답'}</small></div>
+<div class="kpi"><small>맛 긍정 (4점 이상)</small><div>${tp}%</div><small>평균 ${avg('taste')}점</small></div>
+<div class="kpi"><small>쿠폰으로 실제 구매</small><div>${up}%</div><small>${usedN}건, ${won(sales)}</small></div>
+<div class="kpi"><small>가격 부담 응답</small><div>${pp}%</div><small>구매 의향 ${pct(buyOk)}%</small></div></div>
+<div class="card"><h3>"맛있다"와 "샀다"의 차이</h3>
+<div class="gap"><span>맛 긍정</span><div class="track"><i style="width:${tp}%"></i></div><b>${tp}%</b></div>
+<div class="gap"><span>구매 의향</span><div class="track"><i style="width:${pct(buyOk)}%;opacity:.6"></i></div><b>${pct(buyOk)}%</b></div>
+<div class="gap"><span>실제 구매</span><div class="track"><i class="g" style="width:${up}%"></i></div><b>${up}%</b></div>
+<p class="note">맛 긍정과 실제 구매의 차이: <b>${tp-up}%p</b>. 이 차이가 클수록 맛 외의 이유(가격, 용량, 포장)로 사지 않는다는 뜻입니다.</p>
+<div class="verdict ${cls}"><b>권고: ${v[0]}</b><br>${v[1]}</div></div>
+<div class="grid2" style="margin-top:20px"><div class="card"><h3>항목별 평균</h3><table><tr><td>맛</td><td>${avg('taste')}</td></tr><tr><td>식감</td><td>${avg('tex')}</td></tr><tr><td>포장</td><td>${avg('pack')}</td></tr><tr><td>구매 의향</td><td>${avg('buy')}</td></tr></table>
+<h3 style="margin-top:16px">응답 국적</h3><p class="note">${Object.entries(rs.reduce((a,r)=>(a[r.nat]=(a[r.nat]||0)+1,a),{})).map(([k,c])=>k+' '+c).join(', ')}</p></div>
+<div class="card"><h3>자유 의견 분류 <span class="pill">키워드 기반 시연</span></h3>${Object.entries(cat).map(([k,a])=>`<p style="margin:8px 0"><b>${k}</b> <span class="pill">${a.length}건</span><br><span class="note">${a.slice(0,2).map(esc).join(' / ')||'해당 의견 없음'}</span></p>`).join('')}
+<p class="note">원문은 그대로 보존하고, 실서비스에서는 AI가 번역과 분류를 하고 사람이 검수합니다.</p></div></div>`}
+$('#demo').onclick=()=>{const fr=['맛있는데 병이 너무 커요','A bit too sweet, smaller jar please','少し高いです','价格有点贵','Vị ngon nhưng hơi ngọt','Great taste','食感がいい','포장이 예뻐요',''];
+for(let i=0;i<20;i++){const code='DM-'+Math.random().toString(36).slice(2,6).toUpperCase(),taste=Math.random()<.82?4+(Math.random()<.5?1:0):3,used=Math.random()<.25;
+responses.push({pid:curPid,lang:'en',nat:NAT[i%8],age:1+(i%3),taste,tex:3+(i%3),pack:3+(i%2),price:Math.random()<.35?2:(Math.random()<.5?1:0),buy:Math.random()<.6?4:3,free:fr[i%fr.length],code,t:Date.now(),demo:true});
+coupons.push({code,pid:curPid,used,amount:used?12000:0,shop:'말바우시장 A점포'})}
+save();renderReport()};
+$('#reset').onclick=()=>{responses=responses.filter(r=>r.pid!==curPid);save();renderReport()};
+route();
+</script>
+</body>
+</html>
