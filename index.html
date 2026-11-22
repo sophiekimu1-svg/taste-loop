@@ -164,6 +164,14 @@ footer{max-width:none;margin:0;padding:48px 28px;background:var(--ink);color:rgb
 .sug{border-top:1px solid var(--line);padding:14px 0}.sug b{font-size:16px;margin-right:10px}.sug .ev{font-size:12px;font-weight:700;color:var(--yuja-d)}.sug p{margin:4px 0 0;font-size:14px;color:#3a3a3c}
 @media(max-width:900px){.steps.s5{grid-template-columns:1fr 1fr}.track6{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:480px){.steps.s5{grid-template-columns:1fr}.track6{grid-template-columns:1fr 1fr}}
+.simsteps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.ss{border-top:3px solid var(--yuja);padding-top:12px;font-size:13px;opacity:0;animation:fin .4s forwards}
+.ss i{font-style:normal;font-size:11px;font-weight:800;color:var(--sub)}.ss b{display:block;margin:2px 0}.ss span{color:var(--sub)}
+.simres{opacity:0;animation:fin .5s forwards}
+.simres tr.buy td{background:var(--soft);font-weight:600}
+@keyframes fin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#simrun{margin-top:4px}
+@media(max-width:760px){.simsteps{grid-template-columns:1fr 1fr}.sim table{font-size:13px}.sim td,.sim th{padding:10px 4px}}
 </style>
 </head>
 <body>
@@ -178,8 +186,8 @@ footer{max-width:none;margin:0;padding:48px 28px;background:var(--ink);color:rgb
 <!-- 1 소개 -->
 <section id="s-intro">
 <div class="hero2">
-<div><p class="eyebrow">Gwangju Tasting Lab</p><h1>수출 전에,<br>먼저 맛보게<br>합니다.</h1>
-<p class="lead"><b style="color:var(--ink)">광주에서 먼저 검증하고, 세계에서 다시 확인합니다.</b><br>광주 시장과 대학가의 외국인과 시민이 전남 농식품을 맛보고 실제로 사는지 확인한 뒤, 고친 제품을 목표 국가에서 다시 검증해 수출 실패 위험을 줄입니다.</p>
+<div><p class="eyebrow">Gwangju Tasting Lab</p><h1>광주에서 맛보고,<br>세계에서<br>검증합니다.</h1>
+<p class="lead">전남 농식품의 광주 시식과 실구매 데이터를 해외 현지 소비자 반응과 연결하는 <b style="color:var(--ink)">수출 사전검증 플랫폼</b>입니다. 시식한 손님은 인근 점포에서 구매해 광주 상권에 새 소비를 만듭니다.</p>
 <div class="btns"><a class="btn y" href="#company">기업으로 시작</a><a class="btn w" href="#survey">시식 설문 체험</a></div></div>
 <div class="ph hero-img"><img src="img/hero.jpg" alt="광주 전통시장에서 여러 나라 학생들이 유자차를 시식하는 모습"><span class="tag">연출 이미지</span></div>
 </div>
@@ -279,29 +287,17 @@ footer{max-width:none;margin:0;padding:48px 28px;background:var(--ink);color:rgb
 <div class="ph" style="aspect-ratio:4/3"><img src="img/abroad.jpg" alt="해외 마트에서 유자차를 시식하는 소비자"><span class="tag">연출 이미지 (실제 해외 실증 전)</span></div>
 </div>
 <h3 style="margin-top:24px">목표 국가 선정 기준 (제품별)</h3>
-<div class="card" style="margin:8px 0 28px"><h3>샘플 발송 관리 <span class="pill">시연용 흐름, 실제 배송 기능 아님</span></h3>
-<p class="note" style="margin:0 0 16px">예시: 고흥 유자청 250g 소용량 30병, 베트남 하노이 현지 시식</p>
-<div class="track6">
-<div class="t on"><i>1</i><b>국가 선정</b><span>베트남 (광주 응답 상위)</span></div>
-<div class="t on"><i>2</i><b>샘플 구성</b><span>250g 30병, 다국어 라벨</span></div>
-<div class="t cur"><i>3</i><b>통관 서류</b><span>성분, 표시 기준 확인</span></div>
-<div class="t"><i>4</i><b>발송</b><span>합배송, 유통기한 관리</span></div>
-<div class="t"><i>5</i><b>현지 시식</b><span>파트너 운영, 20~30명</span></div>
-<div class="t"><i>6</i><b>결과 연결</b><span>국내 리포트와 같은 지표로 비교</span></div>
-</div></div>
 <div class="crit">
 <div class="step"><b>통관과 표시 규정</b>샘플 반입 요건, 성분과 라벨 표시 기준</div>
 <div class="step"><b>소비자 모집</b>현지 시식 참여자 20~30명 확보 가능성</div>
 <div class="step"><b>물류비</b>국가별 합배송 비용과 유통기한</div>
 <div class="step"><b>현지 파트너</b>시식 운영과 판매처 연결이 가능한 협력처</div>
 </div>
-<div class="card"><h3>국내와 해외 비교 리포트 예시 <span class="pill">가상 데이터</span></h3>
-<table><tr><th>지표</th><th>광주 1차</th><th>해외 2차</th><th>읽는 법</th></tr>
-<tr><td>맛 긍정 비율</td><td>82%</td><td>74%</td><td>현지에서도 맛은 통함</td></tr>
-<tr><td>구매 (국내는 쿠폰 사용, 해외는 구매 의향)</td><td>25%</td><td>48%</td><td>해외는 의향이라 실구매와 구분</td></tr>
-<tr><td>가격 부담 응답</td><td>35%</td><td>52%</td><td>현지 가격과 용량 조정 필요</td></tr>
-<tr><td>권고</td><td colspan="3">소용량 제품으로 현지 판매처 연동 후 실구매 재검증</td></tr></table>
-<p class="note">실구매는 현지 판매처와 연동한 뒤 측정합니다. 무료 시식 후 구매 의향과 실제 구매는 구분합니다.</p></div>
+<div class="card sim"><h3>해외 검증 시뮬레이션 <span class="pill">모든 수치 가상, 2027 계획 시연</span></h3>
+<p class="note" style="margin:0 0 14px">목표 국가를 고르면 샘플 발송부터 개선 권고까지 순서대로 보여 줍니다. 광주 기준은 응답 120명, 고흥 유자청 500g입니다.</p>
+<div class="langs" id="simc"><button data-c="vn" class="on">베트남</button><button data-c="us">미국</button><button data-c="jp">일본</button></div>
+<button class="btn y" id="simrun">시뮬레이션 실행</button>
+<div id="simout" style="margin-top:20px"></div></div>
 </section>
 </main>
 <footer>K-AGRI TASTE LOOP 시연판 | 아벤트라(AVENTRA) | 사진은 모두 생성형 AI로 만든 연출 이미지입니다.</footer>
@@ -412,6 +408,25 @@ const top=Object.entries(by).filter(([k,v])=>v.length>=2).map(([k,v])=>[k,v.redu
 if(top)out.push(['해외 검증 후보국',top[0]+' 응답자 맛 평균 '+top[1].toFixed(1)+'점 ('+top[2]+'명)','2단계 현지 샘플 검증 1순위 후보로 검토']);
 if(!out.length)out.push(['현재 유지','큰 개선 신호 없음','응답을 더 모아 같은 기준으로 재확인']);
 return `<div class="card ai" style="margin-top:20px"><h3>AI 제품 개선 제안 <span class="pill">규칙 기반 시연</span></h3><p class="note" style="margin:0 0 14px">설문과 구매 데이터에서 근거를 찾아 개선안을 제시합니다. 실서비스에서는 AI가 자유 의견까지 분석하고 사람이 검토합니다.</p>${out.map(([t,e,d])=>`<div class="sug"><b>${t}</b><span class="ev">근거: ${e}</span><p>${d}</p></div>`).join('')}</div>`}
+const GJ={n:120,taste:82,intent:61,buy:25,price:35,sweet:18};
+const CN={vn:{name:'베트남',city:'하노이',n:30,taste:74,intent:48,price:52,sweet:38,partner:'하노이 한인마트 1곳 (협의 예정)'},
+us:{name:'미국',city:'LA',n:25,taste:68,intent:40,price:44,sweet:52,partner:'LA 아시안마켓 1곳 (협의 예정)'},
+jp:{name:'일본',city:'오사카',n:28,taste:79,intent:45,price:39,sweet:21,partner:'오사카 식품 셀렉트숍 1곳 (협의 예정)'}};
+let simC='vn';document.querySelectorAll('#simc button').forEach(b=>b.onclick=()=>{simC=b.dataset.c;document.querySelectorAll('#simc button').forEach(x=>x.classList.toggle('on',x===b));$('#simout').innerHTML=''});
+$('#simrun').onclick=()=>{const c=CN[simC],o=$('#simout');
+const rec=[];const dp=c.price-GJ.price,ds=c.sweet-GJ.sweet;
+if(dp>=5)rec.push(`${c.name} 응답자의 가격 부담 비율이 광주보다 <b>${dp}%p</b> 높습니다. 500g 제품 외에 250g 소용량의 가격 수용성을 추가 검증할 것을 제안합니다.`);
+if(ds>=10)rec.push(`${c.name} 응답자의 단맛 지적이 광주보다 <b>${ds}%p</b> 많습니다. 당도를 낮춘 현지용 배치를 시험할 것을 제안합니다.`);
+const go=c.taste>=75&&c.intent>=45;
+rec.push(go?`맛 긍정 ${c.taste}%, 구매 의향 ${c.intent}%로 기준을 넘었습니다. 현지 판매처와 연동해 <b>실구매 검증</b> 단계로 넘어갈 것을 제안합니다.`:`맛 긍정 ${c.taste}%로 기준(75%)에 못 미칩니다. 제품을 고친 뒤 광주에서 먼저 재검증할 것을 제안합니다.`);
+const row=(l,g,v,note)=>`<tr><td>${l}</td><td>${g}</td><td>${v}</td><td class="note">${note}</td></tr>`;
+const st=[['샘플 발송',`${c.city}로 250g 소용량 30병 발송, 통관과 라벨 확인`],['현지 시식',`${c.partner}에서 ${c.n}명 시식, 모국어 QR 설문`],['데이터 분석',`맛 긍정 ${c.taste}%, 구매 의향 ${c.intent}%, 가격 부담 ${c.price}%`],['국내 비교','광주 1차 결과와 같은 지표로 비교'],['개선 권고','AI가 차이를 근거로 실행안 제시']];
+o.innerHTML=`<div class="simsteps">${st.map((x,i)=>`<div class="ss" style="animation-delay:${i*.45}s"><i>0${i+1}</i><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>
+<div class="simres" style="animation-delay:2.4s"><table><tr><th>지표</th><th>광주 1차</th><th>${c.name} 2차</th><th>측정 기준</th></tr>
+${row('응답 수',GJ.n+'명',c.n+'명','표본이 작아 참고용')}${row('맛 긍정',GJ.taste+'%',c.taste+'%','5점 중 4점 이상')}${row('구매 의향',GJ.intent+'%',c.intent+'%','5점 중 4점 이상, 같은 기준')}
+<tr class="buy"><td>실제 구매</td><td>${GJ.buy}%</td><td>측정 전</td><td class="note">광주는 쿠폰 사용, 해외는 판매처 연동 후 측정</td></tr>
+${row('가격 부담',GJ.price+'%',c.price+'%','조금 또는 많이 부담')}${row('단맛 지적',GJ.sweet+'%',c.sweet+'%','자유 의견 분류')}</table>
+<div class="verdict ${go?'go':'fix'}"><b>AI 개선 권고</b>${rec.map(x=>`<p style="margin:8px 0 0">${x}</p>`).join('')}</div></div>`};
 $('#demo').onclick=()=>{const fr=['맛있는데 병이 너무 커요','A bit too sweet, smaller jar please','少し高いです','价格有点贵','Vị ngon nhưng hơi ngọt','Great taste','食感がいい','포장이 예뻐요',''];
 for(let i=0;i<20;i++){const code='DM-'+Math.random().toString(36).slice(2,6).toUpperCase(),taste=Math.random()<.82?4+(Math.random()<.5?1:0):3,used=Math.random()<.25;
 responses.push({pid:curPid,lang:'en',nat:NAT[i%8],age:1+(i%3),taste,tex:3+(i%3),pack:3+(i%2),price:Math.random()<.35?2:(Math.random()<.5?1:0),buy:Math.random()<.6?4:3,free:fr[i%fr.length],code,t:Date.now(),demo:true});
